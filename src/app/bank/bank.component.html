@@ -1,0 +1,16 @@
+<div class="wrapper">
+	<div class="logoWrappper">
+		<h1>TDD Bank</h1>
+			<img src="https://www.logolynx.com/images/logolynx/c4/c4e297cf6b1f22c8df0e7d5ef5bf846e.png" class='logo'>
+	</div>
+	<div class="accountDisplay">
+		<div class="amountInput">
+			<h3 class="customerName">User: {{  account.customerName}}</h3>
+			<p>Balance: <span class="accountBalance">{{ account.balance}}</span></p>
+				<input class="amount" />
+				<button class="depositButton" (click)="depositMoney(account, amount)">Sätt in belopp</button><br/>
+				<button class="withdrawButton" (click)="withdraw(account, amount)">Ta ut belopp</button><br/>
+		</div>
+
+	</div>
+</div>
