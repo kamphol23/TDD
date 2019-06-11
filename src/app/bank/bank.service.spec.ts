@@ -1,13 +1,13 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import {Account} from '../account';
 
-import {BankComponent} from './bank.component'
+
 import { BankService } from './bank.service';
 
 
 describe('BankService', () => {
 	let service: BankService;
-	let component: BankComponent;
+
 
 	beforeEach(() => {
 
@@ -17,7 +17,12 @@ describe('BankService', () => {
 	});
 
 
+
+
+
+
 	it('should be created', () => {
+		const service: BankService = TestBed.get(BankService);
 		expect(service).toBeTruthy();
 	});
 
@@ -40,34 +45,29 @@ describe('BankService', () => {
 			expect(actual).toBe(100)
 		});
 
-		it('should throw an error if balance is not a number ', () =>{
-			let account = {
-				customerName: 'kamphol',
-				balance: 'asda'
-			}
-
-			let actual = () => service.getBalance(account);
-			expect(actual).toThrow();
-		});
 
 		it('should throw an error if balance is below zero ', () =>{
 			let account = {
 				customerName: 'kamphol',
 				balance:-123
 			}
-			let testValue = -1;
-			let actual = () => service.getBalance(testValue);
+
+			let actual = () => service.getBalance(account);
 			expect(actual).toThrow();
 		});
 
-		it('should throw an error if username is not a string', () =>{
+		it('should throw an error if username have whitespace at start', () =>{
 			let account = {
-				customerName:123,
-				balance:100
+				customerName: ' kamphol ',
+				balance: 100
 			};
+
+
 			let actual  = () =>  service.getBalance(account);
 			expect(actual).toThrow();
 		});
+
+
 		it('should throw an error if username is a empty string', () =>{
 			let account = {
 				customerName:'',
@@ -86,19 +86,24 @@ describe('BankService', () => {
 			let actual = () => service.getBalance(account);
 			expect(actual).toThrow();
 		});
+
 	});
+
+
 
 	describe('Deposit', () => {
 		it('Should have an function name diposit', () => {
 			expect(service.deposit).toBeTruthy();
 		});
 
-		it('should throw an error if username is not a string', () => {
+		it('should throw an error if username have whitespace at the start', () => {
 			let account = {
-				customerName: 123,
+				customerName: ' kamphol',
 				balance: 100
 			};
-			let actual = () => service.deposit(account, account);
+
+			let amount = 10
+			let actual = () => service.deposit(account, amount);
 			expect(actual).toThrow();
 		});
 
@@ -107,7 +112,10 @@ describe('BankService', () => {
 				customerName: '',
 				balance: 100
 			};
-			let actual = () => service.deposit(account, account);
+			let amount = 10
+
+
+			let actual = () => service.deposit(account, amount);
 			expect(actual).toThrow();
 		});
 
@@ -139,14 +147,7 @@ describe('BankService', () => {
 			expect(actual).toThrow();
 		});
 
-		it('should throw an error if amount is not a number', () => {
-			let account = {
-				customerName: 'kamphol',
-				balance: 'should not work'
-			};
-			let actual = () => service.deposit(account, 'should not work');
-			expect(actual).toThrow();
-		});
+
 
 		it('should add the selected amount', () => {
 			let account = {
@@ -167,12 +168,13 @@ describe('BankService', () => {
 			expect(service.withdraw).toBeTruthy();
 		});
 
-		it('should throw an error if username is not a string', () => {
+		it('should throw an error if username has whitespace at the start', () => {
 			let account = {
-				customerName: 123,
+				customerName:' kamphol',
 				balance: 1200
 			};
-			let actual = () => service.withdraw(account, account);
+			let amount = 100;
+			let actual = () => service.withdraw(account, amount);
 			expect(actual).toThrow();
 		});
 
@@ -181,27 +183,22 @@ describe('BankService', () => {
 				customerName: '',
 				balance: 1200
 			};
-			let actual = () => service.withdraw(account, 100);
+			let amount = 100;
+			let actual = () => service.withdraw(account, amount);
 			expect(actual).toThrow();
 		});
 
 		it('should throw an error if username is null', () =>{
 			let account = {
 				customerName: null,
-				balance:500
+				balance: 1000
 			}
-			let actual = () => service.getBalance(account, 100);
+			let amount = 100;
+			let actual = () => service.withdraw(account, amount);
 			expect(actual).toThrow();
 		});
 
-		it('should thorw an error if amount is not a numbet',() => {
-			let account = {
-				customerName: 'kamphol',
-				balance: 'should not work'
-			};
-			let actual = () => service.withdraw(account, account.balance);
-			expect(actual).toThrow();
-		});
+	
 
 		it('should thorw an error if amount is equal to zero', () =>{
 			let account = {
@@ -243,50 +240,6 @@ describe('BankService', () => {
 
 	});
 
-	// describe('transfer', () => {
-	//
-	// 	it('should have an function name transfer',() => {
-	// 		expect(service.transfer).toBeTruthy();
-	// 	});
-	//
-	// 	it('should thorw an error if userFrom username is not a string', () =>{
-	// 		let accountFrom = {
-	// 			customerName: 123,
-	// 			balance: 500
-	// 		};
-	// 		let accountTo = {
-	// 			customerName: 'Turk på burk',
-	// 			balance: 500
-	// 		};
-	// 		let actual = () => service.transfer(accountFrom, accountTo, 200);
-	// 		expect(actual).toThrow();
-	// 	});
-	//
-	// 	it('should thorw an error if userFrom username is a empty string', () =>{
-	// 		let accountFrom = {
-	// 			customerName: '',
-	// 			balance: 500
-	// 		};
-	// 		let accountTo = {
-	// 			customerName: 'Turk på burk',
-	// 			balance: 500
-	// 		};
-	// 		let actual = () => service.transfer(accountFrom, accountTo, 200);
-	// 		expect(actual).toThrow();
-	// 	});
-	//
-	// 	it('should thorw an error if userTo username is not a string', () =>{
-	// 		let accountFrom = {
-	// 			customerName: "123",
-	// 			balance: 500
-	// 		};
-	// 		let accountTo = {
-	// 			customerName: 56,
-	// 			balance: 500
-	// 		};
-	// 		let actual = () => service.transfer(accountFrom, accountTo, 200);
-	// 		expect(actual).toThrow();
-	// 	});
-	// });
+
 
 });
