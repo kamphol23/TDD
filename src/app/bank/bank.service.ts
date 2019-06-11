@@ -11,7 +11,7 @@ export class BankService {
     balance: 200,
   }
 
-	getBalance(account: Account):number{
+	getBalance(account: Account): number{
 		if (account.customerName === '' || typeof account.customerName !== 'string' || account.customerName === null) {
 			throw new Error('username is invalid')
 		}
@@ -19,6 +19,7 @@ export class BankService {
 			throw new Error('Balance is invalid')
 		}
 		return account.balance
+
 	};
 
 	deposit(account: Account, amount: number): void {

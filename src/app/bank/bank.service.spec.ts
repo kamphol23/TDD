@@ -32,7 +32,7 @@ describe('BankService', () => {
 		})
 
 		it('should return the balance from the account if everything is valid',() =>{
-			let account:Account  = {
+			let account = {
 				customerName: 'kamphol',
 				balance: 100
 			}
@@ -41,25 +41,27 @@ describe('BankService', () => {
 		});
 
 		it('should throw an error if balance is not a number ', () =>{
-			let account:Account  = {
+			let account = {
 				customerName: 'kamphol',
-				balance:'should not work'
+				balance: 'asda'
 			}
+
 			let actual = () => service.getBalance(account);
 			expect(actual).toThrow();
 		});
 
 		it('should throw an error if balance is below zero ', () =>{
-			let account:Account  = {
+			let account = {
 				customerName: 'kamphol',
-				balance:-1
+				balance:-123
 			}
-			let actual = () => service.getBalance(account);
+			let testValue = -1;
+			let actual = () => service.getBalance(testValue);
 			expect(actual).toThrow();
 		});
 
 		it('should throw an error if username is not a string', () =>{
-			let account:Account  = {
+			let account = {
 				customerName:123,
 				balance:100
 			};
@@ -67,7 +69,7 @@ describe('BankService', () => {
 			expect(actual).toThrow();
 		});
 		it('should throw an error if username is a empty string', () =>{
-			let account:Account  = {
+			let account = {
 				customerName:'',
 				balance:100
 			};
@@ -77,7 +79,7 @@ describe('BankService', () => {
 
 
 		it('should throw an error if username is null', () =>{
-			let account:Account  = {
+			let account = {
 				customerName: null,
 				balance:100
 			}
@@ -92,7 +94,7 @@ describe('BankService', () => {
 		});
 
 		it('should throw an error if username is not a string', () => {
-			let account:Account  = {
+			let account = {
 				customerName: 123,
 				balance: 100
 			};
@@ -101,7 +103,7 @@ describe('BankService', () => {
 		});
 
 		it('should throw an error if username is a empty string', () => {
-			let account:Account  = {
+			let account = {
 				customerName: '',
 				balance: 100
 			};
@@ -110,7 +112,7 @@ describe('BankService', () => {
 		});
 
 		it('should throw an error if username is null', () =>{
-			let account:Account  = {
+			let account = {
 				customerName: null,
 				balance: 200
 			}
@@ -120,7 +122,7 @@ describe('BankService', () => {
 		});
 
 		it('should throw an error if deposit is equal to zero', () => {
-			let account:Account  = {
+			let account = {
 				customerName: 'kamphol',
 				balance: 100
 			};
@@ -129,7 +131,7 @@ describe('BankService', () => {
 		});
 
 		it('should throw an error if deposit is below zero', () => {
-			let account:Account  = {
+			let account = {
 				customerName: 'kamphol',
 				balance: -1
 			};
@@ -138,7 +140,7 @@ describe('BankService', () => {
 		});
 
 		it('should throw an error if amount is not a number', () => {
-			let account:Account  = {
+			let account = {
 				customerName: 'kamphol',
 				balance: 'should not work'
 			};
@@ -147,7 +149,7 @@ describe('BankService', () => {
 		});
 
 		it('should add the selected amount', () => {
-			let account:Account  = {
+			let account = {
 				customerName: 'kamphol',
 				balance: 500
 			};
@@ -166,7 +168,7 @@ describe('BankService', () => {
 		});
 
 		it('should throw an error if username is not a string', () => {
-			let account:Account  = {
+			let account = {
 				customerName: 123,
 				balance: 1200
 			};
@@ -175,7 +177,7 @@ describe('BankService', () => {
 		});
 
 		it('should throw an error if username is a empty string', () =>{
-			let account:Account  = {
+			let account = {
 				customerName: '',
 				balance: 1200
 			};
@@ -184,7 +186,7 @@ describe('BankService', () => {
 		});
 
 		it('should throw an error if username is null', () =>{
-			let account:Account  = {
+			let account = {
 				customerName: null,
 				balance:500
 			}
@@ -193,7 +195,7 @@ describe('BankService', () => {
 		});
 
 		it('should thorw an error if amount is not a numbet',() => {
-			let account:Account  = {
+			let account = {
 				customerName: 'kamphol',
 				balance: 'should not work'
 			};
@@ -202,7 +204,7 @@ describe('BankService', () => {
 		});
 
 		it('should thorw an error if amount is equal to zero', () =>{
-			let account:Account  = {
+			let account = {
 				customerName: 'kamphol',
 				balance: 0
 			};
@@ -211,7 +213,7 @@ describe('BankService', () => {
 		});
 
 		it('should thorw an error if amount is below zero', () =>{
-			let account:Account  = {
+			let account = {
 				customerName: 'kamphol',
 				balance: -1
 			};
@@ -220,7 +222,7 @@ describe('BankService', () => {
 		});
 
 		it('should thorw an error if amount bigger then account balance', () =>{
-			let account:Account  = {
+			let account = {
 				customerName: 'kamphol',
 				balance: 15000
 			};
@@ -229,7 +231,7 @@ describe('BankService', () => {
 		});
 
 		it('should revome the selected amount', () => {
-			let account:Account  = {
+			let account = {
 				customerName: 'kamphol',
 				balance: 500
 			};
@@ -248,11 +250,11 @@ describe('BankService', () => {
 	// 	});
 	//
 	// 	it('should thorw an error if userFrom username is not a string', () =>{
-	// 		let accountFrom:Account  = {
+	// 		let accountFrom = {
 	// 			customerName: 123,
 	// 			balance: 500
 	// 		};
-	// 		let accountTo:Account  = {
+	// 		let accountTo = {
 	// 			customerName: 'Turk på burk',
 	// 			balance: 500
 	// 		};
@@ -261,11 +263,11 @@ describe('BankService', () => {
 	// 	});
 	//
 	// 	it('should thorw an error if userFrom username is a empty string', () =>{
-	// 		let accountFrom:Account  = {
+	// 		let accountFrom = {
 	// 			customerName: '',
 	// 			balance: 500
 	// 		};
-	// 		let accountTo:Account  = {
+	// 		let accountTo = {
 	// 			customerName: 'Turk på burk',
 	// 			balance: 500
 	// 		};
@@ -274,11 +276,11 @@ describe('BankService', () => {
 	// 	});
 	//
 	// 	it('should thorw an error if userTo username is not a string', () =>{
-	// 		let accountFrom:Account  = {
+	// 		let accountFrom = {
 	// 			customerName: "123",
 	// 			balance: 500
 	// 		};
-	// 		let accountTo:Account  = {
+	// 		let accountTo = {
 	// 			customerName: 56,
 	// 			balance: 500
 	// 		};

@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 
 import { BankComponent } from './bank.component';
 import { BankService } from './bank.service';
+import {Account} from '../account';
 
 describe('BankComponent', () => {
   let component: BankComponent;
